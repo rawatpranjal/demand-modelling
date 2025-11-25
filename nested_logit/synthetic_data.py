@@ -25,7 +25,7 @@ np.random.seed(42)
 TRUE_ALPHA = 1.5          # Price sensitivity
 TRUE_BETA_SUGAR = 0.3     # Taste for sugar
 TRUE_BETA_CONST = 1.0     # Base utility constant
-TRUE_SIGMA = 0.6          # Nesting parameter (0 = logit, approaching 1 = perfect substitutes within nest)
+TRUE_SIGMA = 0.7          # Nesting parameter (0 = logit, approaching 1 = perfect substitutes within nest)
 
 
 def generate_product_data(n_markets: int = 20) -> pd.DataFrame:

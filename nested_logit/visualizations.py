@@ -98,6 +98,16 @@ def plot_nested_elasticity_heatmap(elasticity_matrix: np.ndarray,
                                        linewidth=3, label='Same Nest Block')]
     ax.legend(handles=legend_elements, loc='upper right', fontsize=10)
 
+    # Add explanation
+    ax.text(0.5, -0.15, 
+            "Interpretation:\n"
+            "• Yellow Blocks: Products in the same nest (e.g., all Sugary cereals).\n"
+            "• Redder Colors: Higher substitution (cross-elasticity).\n"
+            "• Result: Consumers are more likely to switch to another product in the SAME nest\n"
+            "  than to a product in a different nest. This breaks the IIA assumption!",
+            transform=ax.transAxes, ha='center', fontsize=11,
+            bbox=dict(facecolor='#f0f0f0', alpha=0.9, edgecolor='gray', boxstyle='round,pad=0.5'))
+
     # Add annotation
     ax.text(0.5, -0.18, 'Note: Same-nest cross-elasticities (yellow blocks) are HIGHER\n'
                         'than different-nest cross-elasticities (outside yellow)',

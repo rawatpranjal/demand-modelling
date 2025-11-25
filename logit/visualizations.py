@@ -75,9 +75,14 @@ def plot_elasticity_heatmap(elasticity_matrix: np.ndarray,
     ax.set_title(title, fontsize=14, fontweight='bold')
 
     # Add annotation about IIA
-    ax.text(0.5, -0.15, 'Note: Cross-elasticities in each column are identical (IIA Problem)',
-            transform=ax.transAxes, ha='center', fontsize=10, style='italic',
-            color='darkred')
+    ax.text(0.5, -0.15, 
+            "Interpretation (The IIA Problem):\n"
+            "• Notice that every value in a column (excluding the diagonal) is IDENTICAL.\n"
+            "• This means if Product J raises its price, it loses customers to ALL other products\n"
+            "  in exact proportion to their market shares, regardless of similarity.\n"
+            "• This is unrealistic! (e.g., a luxury car buyer shouldn't switch to a bus pass)",
+            transform=ax.transAxes, ha='center', fontsize=11,
+            bbox=dict(facecolor='#f0f0f0', alpha=0.9, edgecolor='gray', boxstyle='round,pad=0.5'))
 
     plt.tight_layout()
 
@@ -153,14 +158,14 @@ def plot_demand_curves(alpha: float, beta_sugar: float, beta_const: float,
 
     ax.set_xlabel('Price ($)', fontsize=12)
     ax.set_ylabel('Market Share (%)', fontsize=12)
-    ax.set_title('Demand Curves: Market Share vs Own Price\n(Other prices held constant)',
+    ax.set_title('Logit Demand Curves\nSteeper slope indicates higher price sensitivity',
                  fontsize=14, fontweight='bold')
-    ax.legend(loc='upper right', fontsize=10)
+    ax.legend(loc='upper right', fontsize=10, frameon=True, framealpha=0.9)
     ax.set_xlim(price_range)
     ax.set_ylim(0, None)
 
     # Add grid
-    ax.grid(True, alpha=0.3)
+    ax.grid(True, alpha=0.5, linestyle='--')
 
     plt.tight_layout()
 

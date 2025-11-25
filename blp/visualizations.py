@@ -59,6 +59,14 @@ def plot_elasticity_comparison(logit_eta: np.ndarray,
                  'BLP shows higher substitution between similar products!',
                  fontsize=14, fontweight='bold', y=1.02)
 
+    # Add explanatory text box
+    fig.text(0.5, -0.05,
+             "Interpretation:\n"
+             "• Logit (Left): Columns are identical (IIA). If Product A raises price, customers switch to B and C equally.\n"
+             "• BLP (Right): Realistic substitution. If a sugary cereal raises price, customers switch to other sugary cereals.\n"
+             "  (Notice the darker red values on the diagonal and between similar products)",
+             ha='center', fontsize=11, bbox=dict(facecolor='#f0f0f0', alpha=0.8, edgecolor='gray', boxstyle='round,pad=0.5'))
+
     plt.tight_layout()
 
     if save_path:
@@ -96,8 +104,29 @@ def plot_diversion_comparison(logit_diversion: np.ndarray,
     bars2 = ax.bar(x + width/2, blp_div, width, label='BLP',
                    color='#3498db', edgecolor='black')
 
+    # Add value labels
+    for rect in bars1 + bars2:
+        height = rect.get_height()
+        ax.text(rect.get_x() + rect.get_width()/2., height + 0.1,
+                f'{height:.1f}%',
+                ha='center', va='bottom', fontsize=9)
+
     ax.set_xlabel('Product Gaining Sales', fontsize=12)
     ax.set_ylabel('Diversion Ratio (%)', fontsize=12)
+    
+    # Add explanatory text box
+    ax.text(0.5, -0.25,
+            "Interpretation:
+"
+            "• Logit: Diversion is proportional to market share (IIA).
+"
+            "• BLP: Diversion is higher to products with similar characteristics (e.g., similar sugar content).
+"
+            "  This captures that if 'Choco-Bombs' gets expensive, kids switch to 'Store-Frosted', not 'Fiber-Bran'.",
+            transform=ax.transAxes, ha='center', fontsize=11,
+            bbox=dict(facecolor='#f0f0f0', alpha=0.8, edgecolor='gray', boxstyle='round,pad=0.5'))
+            
+    plt.tight_layout()
     ax.set_title(f'Diversion Ratios: Where Do {ref_name} Customers Go?\n'
                  f'(If {ref_name} exits market or raises price)',
                  fontsize=14, fontweight='bold')
